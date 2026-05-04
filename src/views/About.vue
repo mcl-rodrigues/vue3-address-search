@@ -5,14 +5,10 @@ import CenteredCardLayout from '../layouts/CenteredCardLayout.vue'
 <template>
   <CenteredCardLayout>
     <div class="card">
-      <div class="card-header">
-
-      </div>
+      <div class="card-header"></div>
       <div class="card-body">
         <h5 class="card-title">Sobre</h5>
-        <p class="card-text">
-          texto sobre
-        </p>
+        <p class="card-text">texto sobre</p>
       </div>
     </div>
   </CenteredCardLayout>
