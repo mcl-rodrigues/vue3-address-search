@@ -16,7 +16,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" exact-active-class="active" to="/">Home</router-link>
-          <router-link class="nav-link" exact-active-class="active" to="/enderecos">Endereços</router-link>
+          <router-link class="nav-link" exact-active-class="active" to="/enderecos"
+            >Endereços</router-link
+          >
           <router-link class="nav-link" exact-active-class="active" to="/sobre">Sobre</router-link>
         </div>
       </div>
