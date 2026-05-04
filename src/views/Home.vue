@@ -1,10 +1,11 @@
 <script setup>
+import { ref, reactive } from 'vue'
 import CenteredCardLayout from '../layouts/CenteredCardLayout.vue'
-import { ref, reactive, onMounted } from 'vue'
-import IMask from 'imask'
+import { getAddressByCep } from '../services/viaCepService'
 
 const cep = ref('')
-const cepInput = ref(null)
+const isLoading = ref(false)
+const errorMessage = ref('')
 const addressLoaded = ref(false)
 const address = reactive({
   street: '',
@@ -15,14 +16,47 @@ const address = reactive({
   state: ''
 })
 
-onMounted(() => {
-  IMask(cepInput.value, {
-    mask: '00000-000'
-  })
-})
-
 function handleSubmit() {
   //
+}
+
+function fillAddress(data) {
+  address.street = data.logradouro
+  address.district = data.bairro
+  address.city = data.localidade
+  address.state = data.uf
+}
+
+function resetAddress() {
+  address.street = ''
+  address.number = ''
+  address.complement = ''
+  address.district = ''
+  address.city = ''
+  address.state = ''
+}
+
+async function handleBuscaCep() {
+  const cepNum = cep.value.replace(/\D/g, '')
+
+  errorMessage.value = ''
+  addressLoaded.value = false
+
+  resetAddress()
+
+  isLoading.value = true
+
+  try {
+    const data = await getAddressByCep(cepNum)
+
+    fillAddress(data)
+
+    addressLoaded.value = true
+  } catch (error) {
+    errorMessage.value = error.message
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -36,13 +70,27 @@ function handleSubmit() {
         <form @submit.prevent="handleSubmit">
           <div class="input-group mb-3">
             <input
-              ref="cepInput"
               v-model="cep"
               type="text"
               class="form-control"
               placeholder="CEP"
+              v-mask="'00000-000'"
             >
-            <button class="btn btn-success" type="button" id="cep-search-btn">Buscar CEP</button>
+            <button
+              :disabled="isLoading"
+              id="cep-search-btn"
+              type="button"
+              class="btn btn-success"
+              @click="handleBuscaCep"
+            >
+              {{ isLoading ? 'Buscando...' : 'Buscar CEP' }}
+            </button>
+          </div>
+          <div
+            v-if="errorMessage"
+            class="alert alert-danger mt-3"
+          >
+            {{ errorMessage }}
           </div>
           <div
             v-if="addressLoaded"
@@ -59,7 +107,7 @@ function handleSubmit() {
               >
             </div>
             <div class="mb-3">
-              <label for="text-address-number" class="form-label">Número</label>
+              <label for="text-address-number" class="form-label">Número <span class="text-body-secondary">(opcional)</span></label>
               <input
                 v-model="address.number"
                 type="text"
@@ -69,7 +117,7 @@ function handleSubmit() {
               >
             </div>
             <div class="mb-3">
-              <label for="text-address-complement" class="form-label">Complemento</label>
+              <label for="text-address-complement" class="form-label">Complemento <span class="text-body-secondary">(opcional)</span></label>
               <input
                 v-model="address.complement"
                 type="text"
