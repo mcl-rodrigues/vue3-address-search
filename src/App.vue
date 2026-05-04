@@ -1,10 +1,14 @@
 <script setup>
-  import AppHeader from './components/AppHeader.vue'
+import AppHeader from './components/AppHeader.vue'
 </script>
 
 <template>
-  <AppHeader />
-  <router-view />
+  <div class="d-flex flex-column min-vh-100">
+    <AppHeader />
+    <main class="flex-fill d-flex align-items-center justify-content-center">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
