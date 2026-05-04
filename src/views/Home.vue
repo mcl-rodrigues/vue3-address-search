@@ -16,7 +16,7 @@ const address = reactive({
   state: ''
 })
 
-function handleSubmit() {
+function handleSubmitSave() {
   //
 }
 
@@ -36,11 +36,23 @@ function resetAddress() {
   address.state = ''
 }
 
+function handleCancel() {
+    cep.value = ''
+    errorMessage.value = ''
+    addressLoaded.value = false
+
+    resetAddress()
+}
+
 async function handleBuscaCep() {
   const cepNum = cep.value.replace(/\D/g, '')
 
+  if (cepNum.length !== 8) {
+    errorMessage.value = 'CEP inválido'
+    return
+  }
+
   errorMessage.value = ''
-  addressLoaded.value = false
 
   resetAddress()
 
@@ -54,6 +66,7 @@ async function handleBuscaCep() {
     addressLoaded.value = true
   } catch (error) {
     errorMessage.value = error.message
+    addressLoaded.value = false
   } finally {
     isLoading.value = false
   }
@@ -67,7 +80,7 @@ async function handleBuscaCep() {
         <h5 class="card-title">Busca CEP</h5>
       </div>
       <div class="card-body">
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent="handleBuscaCep">
           <div class="input-group mb-3">
             <input
               v-model="cep"
@@ -79,13 +92,14 @@ async function handleBuscaCep() {
             <button
               :disabled="isLoading"
               id="cep-search-btn"
-              type="button"
+              type="submit"
               class="btn btn-success"
-              @click="handleBuscaCep"
             >
               {{ isLoading ? 'Buscando...' : 'Buscar CEP' }}
             </button>
           </div>
+        </form>
+        <form @submit.prevent="handleSubmitSave">
           <div
             v-if="errorMessage"
             class="alert alert-danger mt-3"
@@ -114,6 +128,7 @@ async function handleBuscaCep() {
                 class="form-control"
                 id="text-address-number"
                 placeholder="Número"
+                maxlength="10"
               >
             </div>
             <div class="mb-3">
@@ -124,6 +139,7 @@ async function handleBuscaCep() {
                 class="form-control"
                 id="text-address-complement"
                 placeholder="Complemento"
+                maxlength="20"
               >
             </div>
             <div class="mb-3">
@@ -158,6 +174,14 @@ async function handleBuscaCep() {
                 placeholder="Estado"
                 disabled
               >
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-danger" @click="handleCancel">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Salvar Endereço
+              </button>
             </div>
           </div>
         </form>
