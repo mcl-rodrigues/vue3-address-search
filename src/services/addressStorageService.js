@@ -22,3 +22,15 @@ export async function saveAddress(address) {
 
   await db.add(STORE_NAME, address)
 }
+
+export async function getAllAddresses() {
+  const db = await initDB()
+
+  return db.getAll(STORE_NAME)
+}
+
+export async function deleteAddress(id) {
+  const db = await initDB()
+
+  return db.delete(STORE_NAME, id)
+}
