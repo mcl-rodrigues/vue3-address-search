@@ -112,7 +112,7 @@ npm run preview
 - Os dados são salvos no navegador via IndexedDB
 - Não há necessidade de backend para execução
 - Recomendado usar Chrome para melhor compatibilidade
-```
+
 
 ## 🔗 Links
 
