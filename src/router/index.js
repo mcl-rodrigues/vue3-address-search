@@ -15,6 +15,11 @@ const routes = [
     component: AddressesView,
   },
   {
+    path: '/enderecos/editar/:id',
+    name: 'edit-address',
+    component: HomeView,
+  },
+  {
     path: '/sobre',
     name: 'about',
     component: AboutView,

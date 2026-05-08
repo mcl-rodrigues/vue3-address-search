@@ -1,12 +1,20 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import CenteredCardLayout from '../layouts/CenteredCardLayout.vue'
 import { getAllAddresses, deleteAddress } from '../services/addressStorageService'
 
+const route = useRoute()
 const allAddresses = ref([])
+const showUpdatedMessage = ref(false)
 
 onMounted(async () => {
   allAddresses.value = await getAllAddresses()
+
+  const updated = route.query.updated
+  if (updated) {
+    showUpdatedMessage.value = true
+  }
 })
 
 async function handleDelete(id) {
@@ -21,9 +29,12 @@ async function handleDelete(id) {
   <CenteredCardLayout>
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title">Lista de Endereços</h5>
+        <h5 class="card-title m-0">Lista de Endereços</h5>
       </div>
       <div class="card-body">
+        <div v-if="showUpdatedMessage" class="alert alert-success mt-3">
+          Endereço atualizado com sucesso!
+        </div>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -41,13 +52,13 @@ async function handleDelete(id) {
               <td>{{ address.street }} {{ address.number }}</td>
               <td>
                 <div class="d-grid gap-2 d-md-flex justify-content-between">
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-warning"
+                  <RouterLink
+                    :to="`/enderecos/editar/${address.id}`"
                     title="Editar endereço"
+                    class="btn btn-sm btn-warning"
                   >
                     Editar
-                  </button>
+                  </RouterLink>
                   <button
                     type="button"
                     class="btn btn-sm btn-danger"

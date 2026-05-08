@@ -1,15 +1,20 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import CenteredCardLayout from '../layouts/CenteredCardLayout.vue'
 import { getAddressByCep } from '../services/viaCepService'
-import { saveAddress } from '../services/addressStorageService'
+import { saveAddress, updateAddress, getAddressById } from '../services/addressStorageService'
 
 const addressLoaded = ref(false)
 const cep = ref('')
 const isLoading = ref(false)
 const isSaving = ref(false)
 const errorMessage = ref('')
+const route = useRoute()
+const router = useRouter()
 const successMessage = ref('')
+const editingAddressId = ref(null)
+const saveButtonText = ref('Salvar Endereço')
 const address = reactive({
   street: '',
   number: '',
@@ -17,6 +22,13 @@ const address = reactive({
   district: '',
   city: '',
   state: '',
+})
+
+onMounted(async () => {
+  const idParam = route.params.id
+  if (idParam) {
+    await loadAddressForEdit(idParam)
+  }
 })
 
 async function handleSubmitSave() {
@@ -29,7 +41,20 @@ async function handleSubmitSave() {
   }
 
   try {
-    await saveAddress(addressObj)
+    if (editingAddressId.value) {
+      addressObj.id = editingAddressId.value
+
+      await updateAddress(addressObj)
+
+      router.push({
+        path: '/enderecos',
+        query: {
+          updated: 1
+        }
+      })
+    } else {
+      await saveAddress(addressObj)
+    }
 
     successMessage.value = 'Endereço salvo com sucesso!'
 
@@ -41,6 +66,23 @@ async function handleSubmitSave() {
   } finally {
     isSaving.value = false
   }
+}
+
+async function loadAddressForEdit(idParam) {
+  const data = await getAddressById(idParam)
+  editingAddressId.value = data.id
+  saveButtonText.value = 'Atualizar Endereço'
+
+  cep.value = data.cep
+
+  address.street = data.street
+  address.number = data.number
+  address.complement = data.complement
+  address.district = data.district
+  address.city = data.city
+  address.state = data.state
+
+  showAddressForm()
 }
 
 function fillAddress(data) {
@@ -77,6 +119,12 @@ function resetAddressForm() {
 }
 
 function handleCancel() {
+  if (route.params.id) {
+    editingAddressId.value = null
+    saveButtonText.value = 'Salvar Endereço'
+    router.push('/')
+  }
+
   hideAddressForm()
   resetCepInput()
   resetAddressForm()
@@ -116,7 +164,7 @@ async function handleCepSearch() {
   <CenteredCardLayout>
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title">Busca CEP</h5>
+        <h5 class="card-title m-0">Busca CEP</h5>
       </div>
       <div class="card-body">
         <form @submit.prevent="handleCepSearch">
@@ -216,7 +264,7 @@ async function handleCepSearch() {
                 Cancelar
               </button>
               <button type="submit" class="btn btn-primary" :disabled="isSaving">
-                {{ isSaving ? 'Salvando...' : 'Salvar Endereço' }}
+                {{ isSaving ? 'Salvando...' : saveButtonText }}
               </button>
             </div>
           </div>

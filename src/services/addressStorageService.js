@@ -23,14 +23,26 @@ export async function saveAddress(address) {
   await db.add(STORE_NAME, address)
 }
 
+export async function updateAddress(address) {
+  const db = await initDB()
+
+  await db.put(STORE_NAME, address)
+}
+
 export async function getAllAddresses() {
   const db = await initDB()
 
   return db.getAll(STORE_NAME)
 }
 
+export async function getAddressById(id) {
+  const db = await initDB()
+
+  return db.get(STORE_NAME, Number(id))
+}
+
 export async function deleteAddress(id) {
   const db = await initDB()
 
-  return db.delete(STORE_NAME, id)
+  return db.delete(STORE_NAME, Number(id))
 }
