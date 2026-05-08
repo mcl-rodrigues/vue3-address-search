@@ -1,77 +1,77 @@
 # 📍 Vue 3 Address Search
 
-Este é um projeto de estudo feito com **Vue 3 + Vite**, que simula um sistema simples de gerenciamento de endereços utilizando CEP.
+This is a study project built with **Vue 3 + Vite**, simulating a simple address management system using postal code (CEP) lookup.
 
-O objetivo é praticar conceitos do ecossistema Vue e simular um fluxo real de cadastro, listagem e edição de dados no frontend.
-
----
-
-## 🚀 Funcionalidades
-
-- Busca de endereço a partir do CEP (ViaCEP)
-- Cadastro de novos endereços
-- Listagem de endereços salvos
-- Edição de endereços existentes
-- Exclusão de registros
-- Persistência de dados no navegador via IndexedDB
+The goal is to practice Vue ecosystem concepts and simulate a real-world frontend flow for creating, listing, and editing data.
 
 ---
 
-## 🧠 Objetivo do projeto
+## 🚀 Features
 
-Este projeto foi desenvolvido como exercício prático para consolidar conhecimentos em desenvolvimento frontend, com foco em:
-
-- Componentização com Vue 3 (Composition API)
-- Reatividade com `ref` e `reactive`
-- Vue Router com rotas dinâmicas
-- CRUD completo no frontend
-- Uso de IndexedDB para persistência local
-- Organização de código em services
-- Tratamento de loading, erros e feedback de interface
+- Address lookup using postal code (ViaCEP API)
+- Create new addresses
+- List saved addresses
+- Edit existing addresses
+- Delete records
+- Data persistence in the browser using IndexedDB
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🧠 Project Purpose
+
+This project was developed as a hands-on exercise to consolidate frontend development skills, focusing on:
+
+- Vue 3 component-based architecture (Composition API)
+- Reactivity with `ref` and `reactive`
+- Vue Router with dynamic routes
+- Full CRUD operations on the frontend
+- IndexedDB for local persistence
+- Code organization using services
+- Handling loading states, errors, and UI feedback
+
+---
+
+## 🛠️ Technologies used
 
 - Vue 3.5.32
 - Vue Router 5.0.4
 - Vite 8.0.8
 - Bootstrap 5.3.8
 - IndexedDB (idb 8.0.3)
-- API ViaCEP
+- ViaCEP API
 - Node.js 20+
 
 ---
 
-## 📸 Demonstração
+## 📸 Demo
 
-- Tela de busca por CEP
-- Formulário dinâmico de endereço
-- Lista de endereços cadastrados
-- Edição e remoção de registros
-
----
-
-## ▶️ Como rodar o projeto
-
-### ⚠️ Requisitos
-
-- Node.js 20+ instalado
-- npm (ou yarn/pnpm)
-- Navegador moderno (Chrome, Firefox, Edge)
+- Postal code search screen
+- Dynamic address form
+- Saved addresses list
+- Edit and delete records
 
 ---
 
-### 📥 Instalação
+## ▶️ How to run the project
 
-Clone o repositório:
+### ⚠️ Requirements
+
+- Node.js 20+ installed
+- npm (or yarn/pnpm)
+- Modern browser (Chrome, Firefox, Edge)
+
+---
+
+### 📥 Installation
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/mcl-rodrigues/vue3-address-search.git
 cd vue3-address-search
 ```
 
-Instale as dependências:
+Install dependencies:
 
 ```bash
 npm install
@@ -79,19 +79,19 @@ npm install
 
 ---
 
-### 🚀 Executando em desenvolvimento
+### 🚀 Run in development mode
 
 ```bash
 npm run dev
 ```
 
-O projeto ficará disponível em:
+The project will be available at:
 
 http://localhost:5173
 
 ---
 
-### 📦 Build de produção
+### 📦 Production build
 
 ```bash
 npm run build
@@ -99,7 +99,7 @@ npm run build
 
 ---
 
-### 👀 Pré-visualizar build
+### 👀 Preview production build
 
 ```bash
 npm run preview
@@ -107,26 +107,27 @@ npm run preview
 
 ---
 
-### 💡 Observações
+### 💡 Notes
 
-- Os dados são salvos no navegador via IndexedDB
-- Não há necessidade de backend para execução
-- Recomendado usar Chrome para melhor compatibilidade
+- Data is stored in the browser using IndexedDB
+- No backend is required to run this project
+- Chrome is recommended for best compatibility
 
+---
 
 ## 🔗 Links
 
-- Repositório: https://github.com/mcl-rodrigues/vue3-address-search
+- Repository: https://github.com/mcl-rodrigues/vue3-address-search
 - Demo: https://vue3-address-search.vercel.app
 
 ---
 
-## 📌 Observações
+## 📌 Notes
 
-Projeto desenvolvido para fins de estudo.
+This project was developed for learning purposes.
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Projeto livre para fins de estudo.
+Free to use for study purposes.
