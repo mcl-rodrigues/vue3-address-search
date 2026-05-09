@@ -1,6 +1,8 @@
+🇧🇷 Este README também está disponível em Português: [README em PT-BR](README.pt-br.md)
+
 # 📍 Vue 3 Address Search
 
-This is a study project built with **Vue 3 + Vite**, simulating a simple address management system using postal code (CEP) lookup.
+This is a study project built with **Vue 3 + Vite**, simulating a simple address management system using Brazilian postal code (CEP) lookup.
 
 The goal is to practice Vue ecosystem concepts and simulate a real-world frontend flow for creating, listing, and editing data.
 
@@ -8,7 +10,7 @@ The goal is to practice Vue ecosystem concepts and simulate a real-world fronten
 
 ## 🚀 Features
 
-- Address lookup using postal code (ViaCEP API)
+- Address lookup using Brazilian postal codes (CEP) via ViaCEP API
 - Create new addresses
 - List saved addresses
 - Edit existing addresses
@@ -51,6 +53,33 @@ This project was developed as a hands-on exercise to consolidate frontend develo
 - Edit and delete records
 
 ---
+
+## 🧪 How to use
+
+This project uses Brazilian postal codes (**CEP**) to automatically fetch address data using the ViaCEP API.
+
+To test the application:
+
+1. Open the home page
+2. Enter one of the example postal codes below
+3. Click the search button
+4. The address fields will be automatically filled
+5. Save the address and check it in the addresses list page
+6. Saved addresses are persisted locally in the browser using IndexedDB
+
+---
+
+## 🇧🇷 Example postal codes
+
+| Location | Postal Code (CEP) |
+|---|---|
+| Avenida Paulista — São Paulo | `01310-100` |
+| Avenida Faria Lima — São Paulo | `04538-132` |
+| Copacabana Beach — Rio de Janeiro | `22070-002` |
+| Pelourinho — Salvador | `40026-280` |
+| Esplanada dos Ministérios — Brasília | `70050-000` |
+
+> These are real Brazilian postal codes commonly associated with well-known locations.
 
 ## ▶️ How to run the project
 

@@ -1,33 +1,33 @@
-# 📍 Vue 3 Address Search
+# 📍 Busca de Endereço Vue 3
 
-Este é um projeto de estudo feito com **Vue 3 + Vite**, que simula um sistema simples de gerenciamento de endereços utilizando CEP.
+Este é um projeto de estudo desenvolvido com **Vue 3 + Vite**, simulando um sistema simples de gerenciamento de endereços utilizando busca por CEP brasileiro.
 
-O objetivo é praticar conceitos do ecossistema Vue e simular um fluxo real de cadastro, listagem e edição de dados no frontend.
+O objetivo é praticar conceitos do ecossistema Vue e simular um fluxo frontend mais próximo de aplicações reais para criação, listagem e edição de dados.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- Busca de endereço a partir do CEP (ViaCEP)
+- Busca de endereços utilizando CEPs brasileiros através da API ViaCEP
 - Cadastro de novos endereços
 - Listagem de endereços salvos
 - Edição de endereços existentes
-- Exclusão de registros
-- Persistência de dados no navegador via IndexedDB
+- Remoção de registros
+- Persistência de dados no navegador utilizando IndexedDB
 
 ---
 
-## 🧠 Objetivo do projeto
+## 🧠 Objetivo do Projeto
 
-Este projeto foi desenvolvido como exercício prático para consolidar conhecimentos em desenvolvimento frontend, com foco em:
+Este projeto foi desenvolvido como um exercício prático para consolidar habilidades de desenvolvimento frontend, com foco em:
 
-- Componentização com Vue 3 (Composition API)
-- Reatividade com `ref` e `reactive`
+- Arquitetura baseada em componentes com Vue 3 (Composition API)
+- Reatividade utilizando `ref` e `reactive`
 - Vue Router com rotas dinâmicas
-- CRUD completo no frontend
-- Uso de IndexedDB para persistência local
-- Organização de código em services
-- Tratamento de loading, erros e feedback de interface
+- Operações completas de CRUD no frontend
+- IndexedDB para persistência local
+- Organização de código utilizando services
+- Tratamento de estados de carregamento, erros e feedback visual
 
 ---
 
@@ -38,7 +38,7 @@ Este projeto foi desenvolvido como exercício prático para consolidar conhecime
 - Vite 8.0.8
 - Bootstrap 5.3.8
 - IndexedDB (idb 8.0.3)
-- API ViaCEP
+- ViaCEP API
 - Node.js 20+
 
 ---
@@ -47,12 +47,39 @@ Este projeto foi desenvolvido como exercício prático para consolidar conhecime
 
 - Tela de busca por CEP
 - Formulário dinâmico de endereço
-- Lista de endereços cadastrados
+- Lista de endereços salvos
 - Edição e remoção de registros
 
 ---
 
-## ▶️ Como rodar o projeto
+## 🧪 Como utilizar
+
+Este projeto utiliza CEPs brasileiros para buscar automaticamente dados de endereço através da API ViaCEP.
+
+Para testar a aplicação:
+
+1. Abra a página inicial
+2. Digite um dos CEPs de exemplo abaixo
+3. Clique no botão de busca
+4. Os campos do endereço serão preenchidos automaticamente
+5. Salve o endereço e visualize-o na página de endereços cadastrados
+6. Os dados ficam salvos localmente no navegador utilizando IndexedDB
+
+---
+
+## 🇧🇷 CEPs de exemplo
+
+| Localização | CEP |
+|---|---|
+| Avenida Paulista — São Paulo | `01310-100` |
+| Avenida Faria Lima — São Paulo | `04538-132` |
+| Praia de Copacabana — Rio de Janeiro | `22070-002` |
+| Pelourinho — Salvador | `40026-280` |
+| Esplanada dos Ministérios — Brasília | `70050-000` |
+
+> Estes são CEPs reais associados a locais conhecidos do Brasil.
+
+## ▶️ Como executar o projeto
 
 ### ⚠️ Requisitos
 
