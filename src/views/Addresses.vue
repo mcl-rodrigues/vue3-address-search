@@ -7,6 +7,7 @@ import { getAllAddresses, deleteAddress } from '../services/addressStorageServic
 const route = useRoute()
 const allAddresses = ref([])
 const showUpdatedMessage = ref(false)
+const selectedAddress = ref(null)
 
 onMounted(async () => {
   allAddresses.value = await getAllAddresses()
@@ -21,6 +22,10 @@ async function handleDelete(id) {
   await deleteAddress(id)
 
   allAddresses.value = await getAllAddresses()
+}
+
+function handleView(address) {
+  selectedAddress.value = address
 }
 
 </script>
@@ -52,6 +57,17 @@ async function handleDelete(id) {
               <td>{{ address.street }} {{ address.number }}</td>
               <td>
                 <div class="d-grid gap-2 d-md-flex justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-primary"
+                    title="Visualizar endereço"
+                    data-bs-toggle="modal"
+                    data-bs-target="#viewAddressModal"
+                    @click="handleView(address)"
+                  >
+                    <i class="bi bi-eye me-1"></i>
+                    Visualizar
+                  </button>
                   <RouterLink
                     :to="`/enderecos/editar/${address.id}`"
                     title="Editar endereço"
@@ -81,6 +97,67 @@ async function handleDelete(id) {
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="viewAddressModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content" v-if="selectedAddress">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Visualizar endereço
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>CEP:</strong>
+              {{ selectedAddress.cep }}
+            </p>
+            <p>
+              <strong>Endereço:</strong>
+              {{ selectedAddress.street }}
+            </p>
+            <p>
+              <strong>Número:</strong>
+              {{ selectedAddress.number || 'Não informado' }}
+            </p>
+            <p>
+              <strong>Complemento:</strong>
+              {{ selectedAddress.complement || 'Não informado' }}
+            </p>
+            <p>
+              <strong>Bairro:</strong>
+              {{ selectedAddress.district }}
+            </p>
+            <p>
+              <strong>Cidade:</strong>
+              {{ selectedAddress.city }}
+            </p>
+            <p>
+              <strong>Estado:</strong>
+              {{ selectedAddress.state }}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              <i class="bi bi-x-circle me-1"></i>
+              Fechar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </CenteredCardLayout>
