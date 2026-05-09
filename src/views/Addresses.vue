@@ -57,6 +57,7 @@ async function handleDelete(id) {
                     title="Editar endereço"
                     class="btn btn-sm btn-warning"
                   >
+                    <i class="bi bi-pencil me-1"></i>
                     Editar
                   </RouterLink>
                   <button
@@ -65,6 +66,7 @@ async function handleDelete(id) {
                     title="Excluir endereço"
                     @click="handleDelete(address.id)"
                   >
+                    <i class="bi bi-trash me-1"></i>
                     Excluir
                   </button>
                 </div>

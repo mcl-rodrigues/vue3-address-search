@@ -176,8 +176,20 @@ async function handleCepSearch() {
               placeholder="CEP"
               v-mask="'00000-000'"
             />
-            <button :disabled="isLoading" id="cep-search-btn" type="submit" class="btn btn-success">
-              {{ isLoading ? 'Buscando...' : 'Buscar CEP' }}
+            <button
+              :disabled="isLoading"
+              id="cep-search-btn"
+              type="submit"
+              class="btn btn-success"
+            >
+              <template v-if="isLoading">
+                <span class="spinner-border spinner-border-sm me-1"></span>
+                Buscando...
+              </template>
+              <template v-else>
+                <i class="bi bi-search me-1"></i>
+                Buscar CEP
+              </template>
             </button>
           </div>
           <div v-if="errorMessage" class="alert alert-danger mt-3">
@@ -260,11 +272,27 @@ async function handleCepSearch() {
               />
             </div>
             <div class="d-flex justify-content-end gap-2">
-              <button type="button" class="btn btn-outline-danger" @click="handleCancel">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="handleCancel"
+              >
+                <i class="bi bi-x-circle me-1"></i>
                 Cancelar
               </button>
-              <button type="submit" class="btn btn-primary" :disabled="isSaving">
-                {{ isSaving ? 'Salvando...' : saveButtonText }}
+              <button
+                type="submit"
+                class="btn btn-primary"
+                :disabled="isSaving"
+              >
+                <template v-if="isSaving">
+                  <span class="spinner-border spinner-border-sm me-1"></span>
+                  Salvando...
+                </template>
+                <template v-else>
+                  <i class="bi bi-floppy me-1"></i>
+                  {{ saveButtonText }}
+                </template>
               </button>
             </div>
           </div>

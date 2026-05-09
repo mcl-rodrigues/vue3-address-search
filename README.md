@@ -39,6 +39,7 @@ This project was developed as a hands-on exercise to consolidate frontend develo
 - Vue Router 5.0.4
 - Vite 8.0.8
 - Bootstrap 5.3.8
+- Bootstrap Icons 1.13.1
 - IndexedDB (idb 8.0.3)
 - ViaCEP API
 - Node.js 20+

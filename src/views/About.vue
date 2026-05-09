@@ -25,6 +25,7 @@ import CenteredCardLayout from '../layouts/CenteredCardLayout.vue'
           <li>Vue Router 5.0.4</li>
           <li>Vite 8.0.8</li>
           <li>Bootstrap 5.3.8</li>
+          <li>Bootstrap Icons 1.13.1</li>
           <li>IndexedDB (idb 8.0.3)</li>
           <li>API ViaCEP</li>
           <li>Node.js 20+</li>
